@@ -1,0 +1,47 @@
+<div class="container">
+        <h2 style="text-align: center">Supplier Page</h2>
+        <form [formGroup]="mySupplierModel.formSupplierGroup">
+        <div class="form-group">
+            <label for="SupplierCode">Supplier Code:</label>
+            <input formControlName="SupplierCodeControl" [(ngModel)]="mySupplierModel.SupplierCode" type=text class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="SupplierName">Supplier Name:</label>    
+            <input formControlName="SupplierNameControl" [(ngModel)]="mySupplierModel.SupplierName" type=text class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="SupplierAmount">Supplier Amount:</label>    
+            <input id="SupplierAmount" [(ngModel)]="mySupplierModel.SupplierAmoumt" [ngModelOptions]="{standalone:true}" type=text class="form-control">
+        </div>
+        <div class="form-group">
+                <label for="SupplierPhoto">Supplier Photo:</label>    
+                <input id="SupplierPhoto" [(ngModel)]="mySupplierModel.SupplierPhoto" [ngModelOptions]="{standalone:true}" type=text class="form-control">
+        </div>
+                <input [disabled]="!(mySupplierModel.formSupplierGroup.valid)" (click)="add()" type=button class="btn-primary" value="add"/><br>
+                <hr/>
+        </form>        
+                <div *ngIf="mySupplierModel.formSupplierGroup.dirty" 
+                [hidden]="!(hasError('pattern','SupplierCodeControl'))">
+                    Supplier code format is not proper</div><br>
+                <div *ngIf="mySupplierModel.formSupplierGroup.dirty" 
+                [hidden]="!(hasError('required','SupplierCodeControl'))">Supplier Code is required</div><br>
+                <div *ngIf="mySupplierModel.formSupplierGroup.dirty" 
+                [hidden]="!(hasError('required','SupplierNameControl'))">Customer name is required</div><br>
+                <grid-ui grid-Data="" grid-Column=""></grid-ui>
+        <table border="3">
+            <!-- <tr>
+                <td>Supplier Code</td>
+                <td>Supplier name</td>
+                <td>Supplier amount</td>
+                <td>Supplier photo</td>
+            </tr>
+            <tr *ngFor = "let supl of SupplierModel">
+                <td>{{supl.SupplierCode}}</td>
+                <td>{{supl.SupplierName}}</td>
+                <td>{{supl.SupplierAmount}}</td>
+                <td><img class="rounded-circle float-right" src="{{supl.SupplierPhoto}}" height="80" width="80"></td>
+            </tr> -->
+            <grid-ui [grid-columns]="[{'colName':'SupplierCode'},{'colName':'SupplierName'},{'colName':'SupplierAmount'}]" 
+                         [grid-data]="SupplierModels" (grid-selected)="SelectSupplier($event)"></grid-ui> 
+        </table>
+        </div>
